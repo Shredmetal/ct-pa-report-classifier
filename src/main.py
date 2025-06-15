@@ -5,7 +5,7 @@ from tqdm import tqdm
 from src.csv_handler.csv_handler import CSVHandler
 from src.llm_manager.llm_config import LLMConfig
 from src.llm_manager.llm_factory import LLMFactory
-from src.llm_tasks.RadiologyReportCategoriser import RadiologyReportCategoriser
+from src.llm_tasks.radiology_report_categoriser import RadiologyReportCategoriser
 
 if __name__ == "__main__":
 

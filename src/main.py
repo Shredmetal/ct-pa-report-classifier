@@ -5,7 +5,6 @@ from tqdm import tqdm
 from src.csv_handler.csv_handler import CSVHandler
 from src.llm_manager.llm_config import LLMConfig
 from src.llm_manager.llm_factory import LLMFactory
-from src.llm_manager.llm_provider import LLMProvider
 from src.llm_tasks.RadiologyReportCategoriser import RadiologyReportCategoriser
 
 if __name__ == "__main__":
@@ -18,10 +17,10 @@ if __name__ == "__main__":
     reports = CSVHandler.read_csv(radiology_reports_csv_path)
 
     llm_config = LLMConfig(
-        provider=LLMProvider.GEMMA,
-        temperature=0.0,
+        provider=None,
+        temperature=0.1,
         max_tokens=4,
-        gpu_layer_offload_count=47
+        base_url="http://localhost:5001/v1/"
     )
 
     llm = LLMFactory.create_llm(llm_config)

@@ -1,5 +1,6 @@
 .idea
 .venv
 .env
+/.idea
 /data_source
 /data_output

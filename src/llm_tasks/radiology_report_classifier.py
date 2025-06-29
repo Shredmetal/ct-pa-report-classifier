@@ -5,14 +5,14 @@ from typing import Dict, Any
 
 from src.llm_tasks.pe_classifier.pe_classification_prompt_facade import PeClassificationPromptFacade
 
-class RadiologyReportClassifier:
+class RadiologyReportStructuredDataExtractor:
 
     def __init__(self, llm):
         self.llm = llm
         self.prompt_facade = PeClassificationPromptFacade()
         self.output_parser = StrOutputParser()
 
-    def categorise_report(self, report: str) -> Dict[str, Any]:
+    def extract_pe_data(self, report: str) -> Dict[str, Any]:
         presence_chain = self.prompt_facade.presence_prompt | self.llm | self.output_parser
         largeness_chain = self.prompt_facade.size_prompt | self.llm | self.output_parser
         saddle_chain = self.prompt_facade.saddle_prompt | self.llm | self.output_parser

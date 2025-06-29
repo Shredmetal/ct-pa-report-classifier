@@ -5,7 +5,7 @@ from tqdm import tqdm
 from src.csv_handler.csv_handler import CSVHandler
 from src.llm_manager.llm_config import LLMConfig
 from src.llm_manager.llm_factory import LLMFactory
-from src.llm_tasks.radiology_report_classifier import RadiologyReportClassifier
+from src.llm_tasks.radiology_report_classifier import RadiologyReportStructuredDataExtractor
 
 if __name__ == "__main__":
 
@@ -25,11 +25,11 @@ if __name__ == "__main__":
 
     llm = LLMFactory.create_llm(llm_config)
 
-    report_classifier = RadiologyReportClassifier(llm)
+    report_classifier = RadiologyReportStructuredDataExtractor(llm)
 
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
     for report in tqdm(reports, desc="Processing reports"):
-        categorised_report = report_classifier.categorise_report(report)
+        categorised_report = report_classifier.extract_pe_data(report)
         CSVHandler.write_to_csv(categorised_report, save_path)
 

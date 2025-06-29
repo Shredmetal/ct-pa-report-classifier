@@ -15,3 +15,7 @@ The system reads in a 1-column csv from `root/data_source` and writes to `root/d
 Please refer to `src/csv_handler/csv_handler.py` for how reports are ingested. 
 
 Further functionality relating to lung abnormalities and a frontend and in the process of being implemented.
+
+Current planned architecture:
+
+![architecture.jpg](image_assets/architecture.jpg)

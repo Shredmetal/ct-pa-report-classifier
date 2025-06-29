@@ -1,8 +1,8 @@
-from src.llm_tasks.pe_classifier.pe_heart_strain import PulmonaryEmbolusHeartStrain
-from src.llm_tasks.pe_classifier.pe_large import PulmonaryEmbolusLarge
-from src.llm_tasks.pe_classifier.pe_laterality import PulmonaryEmbolusLaterality
-from src.llm_tasks.pe_classifier.pe_presence import PulmonaryEmbolusPresence
-from src.llm_tasks.pe_classifier.pe_saddle import PulmonaryEmbolusSaddle
+from src.llm_tasks.pe_prompts.prompt_templates.pe_heart_strain import PulmonaryEmbolusHeartStrain
+from src.llm_tasks.pe_prompts.prompt_templates.pe_large import PulmonaryEmbolusLarge
+from src.llm_tasks.pe_prompts.prompt_templates.pe_laterality import PulmonaryEmbolusLaterality
+from src.llm_tasks.pe_prompts.prompt_templates.pe_presence import PulmonaryEmbolusPresence
+from src.llm_tasks.pe_prompts.prompt_templates.pe_saddle import PulmonaryEmbolusSaddle
 
 
 class PeClassificationPromptFacade:

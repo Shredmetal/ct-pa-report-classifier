@@ -3,7 +3,7 @@ import string
 from langchain_core.output_parsers import StrOutputParser
 from typing import Dict, Any
 
-from src.llm_tasks.pe_classifier.pe_classification_prompt_facade import PeClassificationPromptFacade
+from src.llm_tasks.pe_prompts.pe_classification_prompt_facade import PeClassificationPromptFacade
 
 class RadiologyReportStructuredDataExtractor:
 

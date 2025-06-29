@@ -3,37 +3,49 @@ import string
 from langchain_core.output_parsers import StrOutputParser
 from typing import Dict, Any
 
-from src.llm_tasks.pe_classifier.pe_presence import PulmonaryEmbolusPresence
-# from src.llm_tasks.pneumonia_laterality.pneumonia_laterality import PneumoniaLaterality
-# from src.llm_tasks.pneumonia_size.pneumonia_size import PneumoniaSize
+from src.llm_tasks.pe_classifier.pe_classification_prompt_facade import PeClassificationPromptFacade
 
 class RadiologyReportClassifier:
 
     def __init__(self, llm):
         self.llm = llm
-        self.presence_prompt = PulmonaryEmbolusPresence.get_pulmonary_embolus_presence_prompts()
-        # self.laterality_prompt = PneumoniaLaterality.get_pneumonia_laterality_prompts()
-        # self.size_prompt = PneumoniaSize.get_pneumonia_size_prompts()
+        self.prompt_facade = PeClassificationPromptFacade()
         self.output_parser = StrOutputParser()
 
     def categorise_report(self, report: str) -> Dict[str, Any]:
-        presence_chain = self.presence_prompt | self.llm | self.output_parser
-        # laterality_chain = self.laterality_prompt | self.llm | self.output_parser
-        # size_chain = self.size_prompt | self.llm | self.output_parser
+        presence_chain = self.prompt_facade.presence_prompt | self.llm | self.output_parser
+        largeness_chain = self.prompt_facade.size_prompt | self.llm | self.output_parser
+        saddle_chain = self.prompt_facade.saddle_prompt | self.llm | self.output_parser
+        laterality_chain = self.prompt_facade.laterality_prompt | self.llm | self.output_parser
+        heart_strain_chain = self.prompt_facade.heart_strain | self.llm | self.output_parser
 
-        presence_result = presence_chain.invoke({"report": report}).strip(string.whitespace + '\'"').lower()
+        presence_result = self._clean_output(presence_chain.invoke({"report": report}))
+        heart_strain_result = self._clean_output(heart_strain_chain.invoke({"report": report}))
 
         if presence_result == "false":
+
+            largeness_result = "not applicable"
+            saddle_result = "not applicable"
             laterality_result = "not applicable"
-            size_result = "not applicable"
         else:
-            pass
-            # laterality_result = laterality_chain.invoke({"report": report}).strip(string.whitespace + '\'"').lower()
-            # size_result = size_chain.invoke({"report": report}).strip(string.whitespace + '\'"').lower()
+
+            largeness_result = self._clean_output(largeness_chain.invoke({"report": report}))
+            saddle_result = self._clean_output(saddle_chain.invoke({"report": report}))
+
+            if saddle_result == "false" or saddle_result == "unknown":
+                laterality_result = self._clean_output(laterality_chain.invoke({"report": report}))
+            else:
+                laterality_result = "not applicable"
 
         return {
             "report": report,
-            "pneumonia_present": presence_result,
-            # "pneumonia_laterality": laterality_result,
-            # "pneumonia_size": size_result
+            "pe_presence": presence_result,
+            "pe_large": largeness_result,
+            "pe_saddle": saddle_result,
+            "pe_laterality": laterality_result,
+            "heart_strain": heart_strain_result
         }
+
+    @staticmethod
+    def _clean_output(llm_output: str) -> str:
+        return llm_output.strip(string.whitespace + '\'"').lower()

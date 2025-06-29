@@ -22,3 +22,4 @@ the main changes of interest would be
   - Tree-in-bud Pattern: numerous small nodules (air-spaces full of puss) in lines centred around airways or vessels, seen in various conditions including TB
   - Head cheese Pattern (yeah, that’s a real thing): Characteristic change with well-defined areas of different density associated with Hypersensitivity Pneumonitis
   - Consolidation (Ground glass changes): Often infective
+add just straight up mass lesions like lung cancers or metastase

@@ -17,7 +17,7 @@ class PulmonaryEmbolusPresence:
             **Important**: You can only respond with EXACTLY:
             1. "true" if the radiologist has reported the existence of a pulmonary embolus or pulmonary embolism,
             2. "false" if the radiologist has not reported the existence of a pulmonary embolus or pulmonary embolism, or
-            3. "possible" if the radiologist indicates a probability but not a certainty of a a pulmonary embolus or pulmonary embolism.
+            3. "possible" if the radiologist indicates a probability but not a certainty of a pulmonary embolus or pulmonary embolism.
 
             # Risk Warning
             Remember to answer only with 'true', 'false', or  'possible' as failing to do so can cause serious and 

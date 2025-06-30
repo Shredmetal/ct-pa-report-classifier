@@ -18,8 +18,8 @@ class LungAbnormality:
             - Emphysema: degradation of the walls of the spongy parts of the lungs, leading to larger air spaces with less surface area
             - Hyperinflation: These lungs have gone from small, spongy, and elastic, to big, blown-out, and floppy
             - Bullae: type of emphysema with large (>10mm) ‘bubbles’ with minimal surfaces for gas exchange. More flexible than regular lung - expands more on breathing in, reducing effectiveness of healthy lung 
-            - Bronchiolitis: inflammation of small airways seen in viral and some autoimmue problems 
-            - Mosaic Pattern: Patchwork pattern of higher and lower density associated with various conditions (including pulmonary oedema, pulmonary haemorrage, small airway changes, and others)
+            - Bronchiolitis: inflammation of small airways seen in viral and some autoimmune problems 
+            - Mosaic Pattern: Patchwork pattern of higher and lower density associated with various conditions (including pulmonary oedema, pulmonary haemorrhage, small airway changes, and others)
             - Nodules: dots, fleshy lumps, etc within the lung itself, May be lymph nodes, inflammatory, infective, cancerous, etc. Long-standing nodules can become calcified
             - Cavitation: Areas of damaged lung with central empty space and thick irregular boundary. Seen in TB, severe (cavitating) pneumonia, and other conditions
             - Air trapping: Areas of relatively more expanded lung seen in Asthma and other conditions
@@ -27,7 +27,7 @@ class LungAbnormality:
             - Tree-in-bud Pattern: numerous small nodules (air-spaces full of puss) in lines centred around airways or vessels, seen in various conditions including TB
             - Head cheese Pattern (yeah, that’s a real thing): Characteristic change with well-defined areas of different density associated with Hypersensitivity Pneumonitis
             - Consolidation (Ground glass changes): Often infective
-            - Mass lesions such as lung cancers or metastase
+            - Mass lesions such as lung cancers or metastases
 
             # Critical Answering Instructions
             **Important**: You can only respond with EXACTLY:

@@ -27,7 +27,7 @@ class CSVHandler:
         mode = 'a' if file_exists else 'w'
 
         with open(write_path, mode, newline='', encoding='utf-8') as csvfile:
-            fieldnames = ['report', 'pneumonia_present', 'pneumonia_laterality', 'pneumonia_size']
+            fieldnames = ['report', 'pe_presence', 'pe_large', 'pe_saddle', 'pe_laterality', 'heart_strain']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
             if not file_exists:

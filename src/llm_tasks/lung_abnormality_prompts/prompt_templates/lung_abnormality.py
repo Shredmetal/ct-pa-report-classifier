@@ -24,8 +24,8 @@ class LungAbnormality:
             - Cavitation: Areas of damaged lung with central empty space and thick irregular boundary. Seen in TB, severe (cavitating) pneumonia, and other conditions
             - Air trapping: Areas of relatively more expanded lung seen in Asthma and other conditions
             - Crazy Paving Pattern: Ground glass changes, intralobular septal thickening, and interlobular septal thickening together. Non-specific, often Pulmonary Oedema or severe infection
-            - Tree-in-bud Pattern: numerous small nodules (air-spaces full of puss) in lines centred around airways or vessels, seen in various conditions including TB
-            - Head cheese Pattern (yeah, that’s a real thing): Characteristic change with well-defined areas of different density associated with Hypersensitivity Pneumonitis
+            - Tree-in-bud Pattern: numerous small nodules (air-spaces full of pus) in lines centred around airways or vessels, seen in various conditions including TB
+            - Head cheese Pattern: Characteristic change with well-defined areas of different density associated with Hypersensitivity Pneumonitis
             - Consolidation (Ground glass changes): Often infective
             - Mass lesions such as lung cancers or metastases
 

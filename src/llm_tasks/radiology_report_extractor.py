@@ -81,12 +81,6 @@ class RadiologyReportStructuredDataExtractor:
             "other_abnormality": other_result,
         }
 
-
-
-
-
-
-
     @staticmethod
     def _clean_output(llm_output: str) -> str:
         return llm_output.strip(string.whitespace + '\'"').lower()

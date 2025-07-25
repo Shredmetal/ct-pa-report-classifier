@@ -91,14 +91,15 @@ class ProcessorRouter:
                     # Process each report
                     file_reports_processed = 0
                     for report in reports:
-                        if report.strip():  # Skip empty reports
-                            # Extract PE data
-                            pe_data = report_extractor.extract_pe_data(report)
-                            CSVHandler.write_to_csv(pe_data, str(pe_output_path), "pe")
 
-                            # Extract lung abnormality data
+                        report = report[ProcessorRouterConfig.REPORT_COLUMN]
+
+                        if report.strip():
+                            pe_data = report_extractor.extract_pe_data(report)
+                            CSVHandler.write_to_csv(pe_data, str(pe_output_path))
+
                             lung_data = report_extractor.extract_lung_abnormality_data(report)
-                            CSVHandler.write_to_csv(lung_data, str(lung_output_path), "lung_abnormality")
+                            CSVHandler.write_to_csv(lung_data, str(lung_output_path))
 
                             file_reports_processed += 1
 

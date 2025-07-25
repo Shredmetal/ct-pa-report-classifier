@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Any
 
 from fastapi import UploadFile, File, HTTPException, APIRouter
 from fastapi.responses import JSONResponse
@@ -74,11 +74,11 @@ class UploaderRouter:
 
     @staticmethod
     @router.get("/api/source-files")
-    async def list_source_files() -> Dict[str, List[str]]:
+    async def list_source_files() -> Dict[str, List[Dict[str, Any]]]:
         """
         List all CSV files in the source directory
         """
-        source_dir = Path("data/source")
+        source_dir = UploaderRouterConfig.UPLOAD_DIR
         if not source_dir.exists():
             return {"files": []}
 

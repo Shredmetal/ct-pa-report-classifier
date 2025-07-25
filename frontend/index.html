@@ -2,9 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Radiology Report Structured Data Extractor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CT-PA Report Classifier</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>HELLO WORLD!</h1>
+    <div class="container">
+        <header>
+            <h1>CT-PA Report Classifier</h1>
+            <p>Upload, process, and manage radiology reports</p>
+        </header>
+
+        <main>
+            <!-- Upload Section -->
+            <section class="card">
+                <h2>📁 Upload CSV Files</h2>
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-content">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <p>Drag & drop CSV files here or <span class="upload-link">browse</span></p>
+                        <p class="upload-hint">Maximum file size: 50MB</p>
+                    </div>
+                    <input type="file" id="fileInput" accept=".csv" multiple hidden>
+                </div>
+                <div id="uploadProgress" class="upload-progress hidden">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText">Uploading...</p>
+                </div>
+            </section>
+
+            <!-- Source Files Section -->
+            <section class="card">
+                <div class="section-header">
+                    <h2>📋 Source Files</h2>
+                    <div class="section-actions">
+                        <button id="refreshSourceBtn" class="btn btn-secondary">🔄 Refresh</button>
+                        <button id="clearSourceBtn" class="btn btn-danger">🗑️ Clear All</button>
+                    </div>
+                </div>
+                <div id="sourceFilesList" class="file-list">
+                    <div class="loading">Loading source files...</div>
+                </div>
+                <div class="process-section hidden" id="processSection">
+                    <div class="form-group">
+                        <label for="outputPrefix">Output Prefix:</label>
+                        <input type="text" id="outputPrefix" value="processed_reports" placeholder="Enter output prefix">
+                    </div>
+                    <button id="processBtn" class="btn btn-primary">⚡ Process Selected Files</button>
+                </div>
+            </section>
+
+            <!-- Processing Status Section -->
+            <section class="card hidden" id="processingSection">
+                <h2>⚙️ Processing Status</h2>
+                <div id="processingStatus" class="processing-status">
+                    <div class="spinner"></div>
+                    <p>Processing files, please wait...</p>
+                </div>
+                <div id="processingResults" class="processing-results hidden"></div>
+            </section>
+
+            <!-- Processed Files Section -->
+            <section class="card">
+                <div class="section-header">
+                    <h2>✅ Processed Files</h2>
+                    <div class="section-actions">
+                        <button id="refreshProcessedBtn" class="btn btn-secondary">🔄 Refresh</button>
+                        <button id="clearProcessedBtn" class="btn btn-danger">🗑️ Clear All</button>
+                    </div>
+                </div>
+                <div id="processedFilesList" class="file-list">
+                    <div class="loading">Loading processed files...</div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

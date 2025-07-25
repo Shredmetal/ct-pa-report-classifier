@@ -1,10 +1,10 @@
 from langchain_core.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
 
 
-class LungBronchiectasis:
+class LungEmphysema:
 
     @staticmethod
-    def get_lung_bronchiectasis_prompts() -> ChatPromptTemplate:
+    def get_lung_emphysema_prompts() -> ChatPromptTemplate:
         human_message = HumanMessagePromptTemplate.from_template(
             """
             # Your Role

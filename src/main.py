@@ -5,14 +5,14 @@ from tqdm import tqdm
 from src.csv_handler.csv_handler import CSVHandler
 from src.llm_manager.llm_config import LLMConfig
 from src.llm_manager.llm_factory import LLMFactory
-from src.llm_tasks.radiology_report_classifier import RadiologyReportStructuredDataExtractor
+from src.llm_tasks.radiology_report_extractor import RadiologyReportStructuredDataExtractor
 
 if __name__ == "__main__":
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
     radiology_reports_csv_path = os.path.join(current_dir, "..", "data_source", "ReportsDATASET.csv")
-    save_path = os.path.join(current_dir, "..", "data_output", "ReportsDATASET_processed_v5.csv")
+    save_path = os.path.join(current_dir, "..", "data_output", "ReportsDATASET_processed_v5")
 
     reports = CSVHandler.read_csv(radiology_reports_csv_path)
 
@@ -30,6 +30,8 @@ if __name__ == "__main__":
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
     for report in tqdm(reports, desc="Processing reports"):
-        categorised_report = report_classifier.extract_pe_data(report)
-        CSVHandler.write_to_csv(categorised_report, save_path)
+        extracted_pe_data = report_classifier.extract_pe_data(report)
+        extracted_lung_abnormality_data = report_classifier.extract_lung_abnormality_data(report)
+        CSVHandler.write_to_csv(extracted_pe_data, (save_path + "_pe_data.csv"), "pe")
+        CSVHandler.write_to_csv(extracted_lung_abnormality_data, (save_path + "_lung_abnormality.csv"), "lung_abnormality")
 

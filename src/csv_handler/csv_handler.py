@@ -1,5 +1,6 @@
 import csv
 import os
+from argparse import ArgumentError
 from typing import List, Dict, Any
 
 
@@ -20,17 +21,31 @@ class CSVHandler:
         return reports
 
     @staticmethod
-    def write_to_csv(data: Dict[str, Any], write_path: str):
+    def write_to_csv(data: Dict[str, Any], write_path: str, output_type:str) -> None:
         os.makedirs(os.path.dirname(write_path), exist_ok=True)
 
         file_exists = os.path.isfile(write_path)
         mode = 'a' if file_exists else 'w'
 
-        with open(write_path, mode, newline='', encoding='utf-8') as csvfile:
-            fieldnames = ['report', 'pe_presence', 'pe_large', 'pe_saddle', 'pe_laterality', 'heart_strain']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        if output_type == 'pe':
+            with open(write_path, mode, newline='', encoding='utf-8') as csvfile:
+                fieldnames = ['report', 'pe_presence', 'pe_large', 'pe_saddle', 'pe_laterality', 'heart_strain']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-            if not file_exists:
-                writer.writeheader()
+                if not file_exists:
+                    writer.writeheader()
 
-            writer.writerow(data)
+                writer.writerow(data)
+
+        elif output_type == 'lung_abnormality':
+            with open(write_path, mode, newline='', encoding='utf-8') as csvfile:
+                fieldnames = ['report', 'lung_abnormality', 'lung_bronchiectasis', 'lung_emphysema', 'lung_bullae', 'other_abnormality']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+                if not file_exists:
+                    writer.writeheader()
+
+                writer.writerow(data)
+
+        else:
+            raise ArgumentError("output_type must be 'pe' or 'lung_abnormality'")

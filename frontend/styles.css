@@ -323,6 +323,13 @@ header p {
     box-shadow: 0 0 0 2px rgba(35, 134, 54, 0.2);
 }
 
+.form-hint {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: var(--space-xs);
+    margin-bottom: 0;
+}
+
 /* Process Section */
 .process-section {
     background-color: var(--bg-tertiary);

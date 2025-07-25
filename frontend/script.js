@@ -14,6 +14,7 @@ const processingSection = document.getElementById('processingSection');
 const processingStatus = document.getElementById('processingStatus');
 const processingResults = document.getElementById('processingResults');
 const outputPrefix = document.getElementById('outputPrefix');
+const llmBaseUrl = document.getElementById('llmBaseUrl');
 const toastContainer = document.getElementById('toastContainer');
 
 // Buttons
@@ -118,6 +119,7 @@ async function processFiles() {
     }
     
     const prefix = outputPrefix.value.trim() || 'processed_reports';
+    const llmUrl = llmBaseUrl.value.trim() || 'http://localhost:5001/v1/';
     
     try {
         processingSection.classList.remove('hidden');
@@ -131,7 +133,8 @@ async function processFiles() {
             },
             body: JSON.stringify({
                 filenames: selectedFiles,
-                output_prefix: prefix
+                output_prefix: prefix,
+                llm_base_url: llmUrl
             })
         });
         
@@ -145,7 +148,7 @@ async function processFiles() {
         }
         
         // Display results
-        displayProcessingResults(data);
+        displayProcessingResults(data, llmUrl);
         showToast('Files processed successfully!', 'success');
         
         // Refresh processed files list and clear selection
@@ -271,8 +274,18 @@ function renderProcessedFiles() {
     processedFilesList.innerHTML = html;
 }
 
-function displayProcessingResults(data) {
-    const results = data.processing_results || [];
+function displayProcessingResults(data, llmUrl) {
+    const results = data.file_results || [];
+    
+    const headerInfo = `
+        <div class="result-item result-success">
+            <strong>Processing Summary:</strong><br>
+            LLM Endpoint: ${llmUrl}<br>
+            Total Files: ${data.total_files_processed || 0}<br>
+            Total Reports: ${data.total_reports_processed || 0}<br>
+            Status: ${data.overall_status || 'Unknown'}
+        </div>
+    `;
     
     const html = results.map(result => {
         let className = 'result-success';
@@ -283,11 +296,12 @@ function displayProcessingResults(data) {
             <div class="result-item ${className}">
                 <strong>${result.filename}:</strong> ${result.message || result.status}
                 ${result.reports_processed ? `<br>Reports processed: ${result.reports_processed}` : ''}
+                ${result.error ? `<br>Error: ${result.error}` : ''}
             </div>
         `;
     }).join('');
     
-    processingResults.innerHTML = html;
+    processingResults.innerHTML = headerInfo + html;
 }
 
 function updateProcessSection() {

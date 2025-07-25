@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Any
 from fastapi import HTTPException, APIRouter
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -13,6 +13,7 @@ from src.llm_tasks.radiology_report_extractor import RadiologyReportStructuredDa
 class ProcessFileRequest(BaseModel):
     filenames: List[str]
     output_prefix: str = "processed_reports"
+    llm_base_url: str = ProcessorRouterConfig.LLM_DEFAULT_BASE_URL
 
 
 class ProcessorRouter:
@@ -22,7 +23,7 @@ class ProcessorRouter:
 
     @staticmethod
     @router.post("/api/process-files")
-    async def process_files(request: ProcessFileRequest, llm_base_url: str = ProcessorRouterConfig.LLM_DEFAULT_BASE_URL) -> JSONResponse:
+    async def process_files(request: ProcessFileRequest) -> JSONResponse:
         """
         Process a list of CSV files through the radiology report extractor
         """
@@ -58,7 +59,7 @@ class ProcessorRouter:
                 provider=None,
                 temperature=0.1,
                 max_tokens=4,
-                base_url=llm_base_url
+                base_url=request.llm_base_url
             )
 
             llm = LLMFactory.create_llm(llm_config)
@@ -149,7 +150,7 @@ class ProcessorRouter:
 
     @staticmethod
     @router.get("/api/processed-files")
-    async def list_processed_files() -> Dict[str, List[str]]:
+    async def list_processed_files() -> Dict[str, List[Dict[str, Any]]]:
         """
         List all processed output files
         """

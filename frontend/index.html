@@ -54,6 +54,11 @@
                         <label for="outputPrefix">Output Prefix:</label>
                         <input type="text" id="outputPrefix" value="processed_reports" placeholder="Enter output prefix">
                     </div>
+                    <div class="form-group">
+                        <label for="llmBaseUrl">LLM API Base URL:</label>
+                        <input type="text" id="llmBaseUrl" value="http://localhost:5001/v1/" placeholder="OpenAI v1 compatible API endpoint">
+                        <p class="form-hint">Default: KoboldCpp (http://localhost:5001/v1/)</p>
+                    </div>
                     <button id="processBtn" class="btn btn-primary">⚡ Process Selected Files</button>
                 </div>
             </section>

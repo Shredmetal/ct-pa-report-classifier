@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import Dict, List
 
 from fastapi import UploadFile, File, HTTPException, APIRouter
 from fastapi.responses import JSONResponse
@@ -14,7 +15,7 @@ class UploaderRouter:
 
     @staticmethod
     @router.post("/api/upload-csv")
-    async def upload_csv_file(file: UploadFile = File(...)):
+    async def upload_csv_file(file: UploadFile = File(...)) -> JSONResponse:
         """
         Upload a CSV file containing radiology reports
         """
@@ -73,7 +74,7 @@ class UploaderRouter:
 
     @staticmethod
     @router.get("/api/source-files")
-    async def list_source_files():
+    async def list_source_files() -> Dict[str, List[str]]:
         """
         List all CSV files in the source directory
         """
